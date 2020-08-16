@@ -1,30 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Room</title>
-</head>
-<body>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
-    <input id="chat-message-input" type="text" size="100"><br>
-    <input id="chat-message-submit" type="button" value="Send">
-    {{ room_name|json_script:"room-name" }}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block app_css %}
+    <link href="{% static 'chat/style.css' %}" rel="stylesheet" type="text/css" />
+{% endblock app_css %}
+
+{% block content %}
+        <div class="room-container">
+            <header>
+            </header>
+            <main>
+                <div class="msg-box" >
+                    <div id="new-message-chat"></div>
+                </div>
+                <div class="msg-input">
+                    <input id="chat-message-input" type="text" placeholder="Type a message"><br>
+                </div>
+                {{ room_name|json_script:"room-name" }}
+
+            </main>
+        </div>
+
     <script>
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
         console.log(roomName)
 
         const chatSocket = new WebSocket(
-            'ws://'
-            + window.location.host
-            + '/ws/chat/'
-            + roomName
-            + '/'
+            `ws://${window.location.host}/ws/chat/${roomName}/`
         );
 
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            document.querySelector('#chat-log').value += (data.message + '\n');
-            console.log('on message')
+            broadcastMessage(data.message, data.username)
+            scrollBottom()
         };
 
         chatSocket.onclose = function(e) {
@@ -35,18 +43,55 @@
         document.querySelector('#chat-message-input').focus();
         document.querySelector('#chat-message-input').onkeyup = function(e) {
             if (e.keyCode === 13) {  // enter, return
-                document.querySelector('#chat-message-submit').click();
+                const messageInputDom = document.querySelector('#chat-message-input');
+                const message = messageInputDom.value;
+                chatSocket.send(JSON.stringify({
+                    'message': message
+                }));
+                messageInputDom.value = '';
             }
         };
 
-        document.querySelector('#chat-message-submit').onclick = function(e) {
-            const messageInputDom = document.querySelector('#chat-message-input');
-            const message = messageInputDom.value;
-            chatSocket.send(JSON.stringify({
-                'message': message
-            }));
-            messageInputDom.value = '';
-        };
+        function scrollBottom() {
+            let msgbox = document.querySelector(".msg-box")
+            msgbox.scrollTop = msgbox.scrollHeight
+        }
+
+        function getTime() {
+            let today = new Date();
+            let time = today.toLocaleString([], { hour: '2-digit', minute: '2-digit' });
+            return time
+
+        }
+    
+        function broadcastMessage(msg, user) { 
+            // create a new div element 
+            let newDiv = document.createElement("div"); 
+            // and give it some content 
+
+            if (user == '{{request.user.username}}') {
+                var msg1 = `<div class="msg-container">
+                                <div class="s-message" >
+                                    <div class="s-msg">${msg}</div>
+                                    <div class="s-time">${getTime()}</div>
+                                </div>
+                            </div>`
+            } else {
+                var msg1 = `<div class="msg-container">
+                                <div class="r-message" >
+                                    <div class="r-user"><a href="#">${user}</a></div>
+                                    <div class="r-msg">${msg}</div>
+                                    <div class="r-time">${getTime()}</div>
+                                </div>
+                            </div>`
+            }
+
+            newDiv.innerHTML = msg1;  
+
+            // add the newly created element and its content into the DOM 
+            let currentDiv = document.getElementById("new-message-chat"); 
+            let parentDiv = currentDiv.parentNode;
+            parentDiv.insertBefore(newDiv, currentDiv); 
+        }
     </script>
-</body>
-</html>
+{% endblock content %}

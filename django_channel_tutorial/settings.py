@@ -56,7 +56,7 @@ ROOT_URLCONF = 'django_channel_tutorial.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'django_channel_tutorial/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,6 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'django_channel_tutorial/static')]
 
 ASGI_APPLICATION = "django_channel_tutorial.routing.application"
 CHANNEL_LAYERS = {

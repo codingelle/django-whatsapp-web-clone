@@ -1,0 +1,107 @@
+main { 
+    display:grid;
+    width: 100vw;
+    grid-template-columns: 1fr;
+    grid-template-rows: 500px 80px;
+    grid-template-areas: "msg-box"
+                         "msg-input";
+    background-color: #f0f0f0ff;
+    height:100%;
+}
+
+.msg-box {
+    grid-area: msg-box;
+    padding-left:4rem;
+    padding-right:4rem;
+    background-color: #e5ddd5;
+    overflow: scroll;
+}
+
+.msg-input {
+    grid-area: msg-input;
+    padding:.2rem 1rem;
+}
+
+.msg-container {
+    display:grid;
+    grid-template-columns: 1fr;
+    padding: .3rem;
+}
+
+.s-message {
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "s-msg"
+                         "s-time";
+
+    border-radius: 15px;
+    justify-self:right;
+    background-color: #dcf8c6ff;
+}
+
+.r-message {
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "r-user"
+                         "r-msg"
+                         "r-time";
+
+    border-radius: 15px;
+    justify-self:left;
+    background-color: white;
+}
+
+.s-msg {
+    grid-area: s-msg;
+    font-size: 1rem;
+}
+
+.s-time {
+    grid-area: s-time;
+    font-size: .75rem;
+    justify-self: right;
+    color: #a2a2a2;
+}
+
+.r-user a {
+  text-decoration: none;
+  color: #72dbb5ff;
+}
+
+.r-user a:hover {
+  text-decoration: underline;
+  color: #72dbb5ff;
+}
+
+.r-user {
+    grid-area: r-user;
+    font-size: .9rem;
+    font-weight: bold;
+}
+
+.r-msg {
+    grid-area: r-msg;
+    font-size: 1rem;
+}
+
+.r-time {
+    grid-area: r-time;
+    font-size: .75rem;
+    justify-self: right;
+    color: #a2a2a2;
+}
+
+
+input[type="text"] {
+    width: 100%;
+    padding: 15px 22px;
+    box-sizing: border-box;  
+    outline:none;
+    border-radius: 15px;
+    border:0;
+    font-size: 1rem;
+}
