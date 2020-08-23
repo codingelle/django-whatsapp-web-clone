@@ -197,19 +197,24 @@
 
 .msg-header {
     grid-area: msg-header;
-    background-color: #f0f0f0ff;
+    background-color: #EDEDED;
     display: grid;
-    grid-template-columns: 37px 1fr 37px 37px 37px;
+    grid-template-columns: 48px auto 37px 37px 37px;
     grid-template-areas: "h-avatar h-users h-search h-attach h-menu" ;
     align-items:center;
-    grid-gap: 1rem;
+    gap: .7rem;
+    padding: 0 1rem;
     border-bottom:.75px solid #CCC;
 }
 
 .h-avatar {
     grid-area: h-avatar;
-    height: 40px;
-    border:1px solid red;
+}
+
+.h-avatar img {
+    width:48px;
+    height: 48px;
+    object-fit: cover;
 }
 
 .h-users {
@@ -219,18 +224,22 @@
     grid-template-rows: 1fr 1fr;
     grid-template-areas: "h-user-group"
                          "h-user-member";
-    row-gap: .4rem;
+    white-space: nowrap;
 }
 
 .h-user-group {
     grid-area: h-user-group;
     font-size: 1rem;
+    overflow:hidden; 
+    text-overflow: ellipsis;
 }
 
 .h-user-member {
     grid-area: h-user-member;
     font-size: .812rem;
     color: #606060ff;
+    overflow:hidden; 
+    text-overflow: ellipsis;
 }
 
 .h-search {
