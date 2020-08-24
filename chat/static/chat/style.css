@@ -144,6 +144,7 @@
     border-bottom:.75px solid #CCC;
     padding: .5rem;
     align-items: center;
+    cursor: pointer;
 }
 
 .room-sidebar-groups-g-img {

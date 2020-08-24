@@ -56,15 +56,15 @@
 
                 <!-- room side bar groups -->
                 {% for grp in groups_participated %}
-                    <div class="room-sidebar-groups">
+            <div class="room-sidebar-groups" onclick="redirect('{{grp.get_absolute_url}}')">
                         <div class="room-sidebar-groups-g-img">
                             <img src="{{ grp.icon.url }}" alt="Default Profile">
                         </div>
                         <div class="room-sidebar-groups-g-msg">
                             <span class="room-sidebar-groups-g-msg1">{{grp.name|title}}</span>
-                            <span class="room-sidebar-groups-g-msg2">{{grp.description|title}}</span>
+                            <span class="room-sidebar-groups-g-msg2" id="rsb-g{{grp.id}}">{{grp.description|title}}</span>
                         </div>
-                        <div class="room-sidebar-groups-g-time">12:17 AM</div>
+                        <div class="room-sidebar-groups-g-time" id="rsb-t{{grp.id}}"></div>
                     </div>
                 {% endfor %}
                 <!-- room side bar groups -->
@@ -152,7 +152,7 @@
             let newDiv = document.createElement("div"); 
             // and give it some content 
 
-            if (user == '{{request.user.username}}') {
+            if (user == '{{request.user.username|title}}') {
                 var msg1 = `<div class="right-msg-container">
                                 <div class="s-message">
                                     <div class="s-msg">${msg}</div>
@@ -177,6 +177,15 @@
             let currentDiv = document.getElementById("new-message-chat"); 
             let parentDiv = currentDiv.parentNode;
             parentDiv.insertBefore(newDiv, currentDiv); 
+
+            // side bar group time
+            document.getElementById('rsb-g{{chatgroup.id}}').innerHTML = `${user}: ${msg}`;
+            document.getElementById('rsb-t{{chatgroup.id}}').innerHTML = getTime();
         }
+
+        function redirect(url) {
+            window.location = url;
+        }
+
     </script>
 {% endblock content %}

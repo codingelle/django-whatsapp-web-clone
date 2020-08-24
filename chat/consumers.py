@@ -38,7 +38,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.room_group_name,
             {
                 'type': 'chat_message',
-                'username': self.scope['user'].username,
+                'username': self.scope['user'].username.title(),
                 'message': message
             }
         )
