@@ -9,7 +9,7 @@
     justify-self: left;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 59px 89px 49px repeat(auto-fit, minmax(73px, 73px));
+    grid-template-rows: 59px 89px 50px repeat(auto-fit, minmax(73px, 73px));
     width:100%;
     border-right:.75px solid #CCC;
 }
@@ -33,6 +33,7 @@
     width:48px;
     height: 48px;
     object-fit: cover;
+    border-radius: 50%;
 }
 
 .sb-status {
@@ -98,11 +99,11 @@
 
 /* room side bar search or new chat */
 .room-sidebar-search-new-chat {
-    justify-self: center;
+    display: grid;
+    align-items: center;
     background-color: #f0f0f0ff; 
     width: 100%;
     padding: 0.40rem .62rem ;
-    height: 49px;
 }
 
 .room-sidebar-search-new-chat2 {
@@ -115,7 +116,7 @@
 }
 
 .room-sidebar-search {
-    align-self: center;
+    align-self: end;
     justify-self: center;
 }
 
@@ -137,7 +138,7 @@
 /* room side bar groups */
 .room-sidebar-groups {
     display:grid;
-    grid-template-columns: 50px auto 65px;
+    grid-template-columns: 49px auto 65px;
     grid-template-areas: "g-img g-msg g-time";
     height:73px;
     border-bottom:.75px solid #CCC;
@@ -153,6 +154,7 @@
     width:50px;
     height: 50px;
     object-fit: cover;
+    border-radius: 50%;
 }
 
 .room-sidebar-groups-g-msg {
@@ -199,7 +201,7 @@
     grid-area: msg-header;
     background-color: #EDEDED;
     display: grid;
-    grid-template-columns: 48px auto 37px 37px 37px;
+    grid-template-columns: 42px auto 37px 37px 37px;
     grid-template-areas: "h-avatar h-users h-search h-attach h-menu" ;
     align-items:center;
     gap: .7rem;
@@ -212,9 +214,10 @@
 }
 
 .h-avatar img {
-    width:48px;
-    height: 48px;
+    width:42px;
+    height: 42px;
     object-fit: cover;
+    border-radius: 50%;
 }
 
 .h-users {

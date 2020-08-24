@@ -7,5 +7,6 @@ app_name = 'chat'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('<str:room_name>/', views.room, name='room'),
+    path('unauthorized/', views.unauthorized, name='unauthorized'),
+    path('<str:group_id>/', views.room, name='room'),
 ]
