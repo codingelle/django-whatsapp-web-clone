@@ -141,7 +141,7 @@
     grid-template-columns: 49px auto 65px;
     grid-template-areas: "g-img g-msg g-time";
     height:73px;
-    border-bottom:.75px solid #CCC;
+    border-bottom:.75px solid #EEE; 
     padding: .5rem;
     align-items: center;
     cursor: pointer;
@@ -207,7 +207,7 @@
     align-items:center;
     gap: .7rem;
     padding: 0 1rem;
-    border-bottom:.75px solid #CCC;
+    border-bottom:.5px solid #CCC;
 }
 
 .h-avatar {
