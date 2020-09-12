@@ -186,7 +186,7 @@
 }
 /* room side bar groups */
 
-.room-container { 
+.room-container__msg { 
     display:grid;
     width: 100%;
     min-height: 99vh;
@@ -196,6 +196,19 @@
     grid-template-areas: "msg-header"
                          "msg-box"
                          "msg-input";
+}
+
+.room-container__preview-img {
+    display:grid;
+    width: 100%;
+    height:99vh;
+    grid-template-rows: 59px auto;
+    grid-template-areas: "msg-header"
+                         "preview-msg-box";
+}
+
+.preview-img-box {
+    grid-area: preview-msg-box;
 }
 
 .msg-header {
@@ -267,10 +280,160 @@ svg {
     grid-area: msg-box;
     padding-left:4rem;
     padding-right:4rem;
-    /*background-color: #e5ddd5; */
+}
+
+.msg-box--background {
     background: #efe7dd url("https://cloud.githubusercontent.com/assets/398893/15136779/4e765036-1639-11e6-9201-67e728e86f39.jpg") repeat;
     overflow-y: scroll;
 }
+
+.preview-img {
+    background-color: #EEE;
+    display: grid;
+    padding:0;
+    grid-template-rows: 49px 1fr 60px 120px;
+    gap: 2rem;
+}
+
+.preview-img__header {
+    background-color: #00bfa5ff;
+    display: grid;
+    grid-template-columns: 42px auto;
+    align-items: center;
+    align-content: center;
+    padding: 1.5rem;
+}
+
+.preview-img__header__close {
+    display: grid; /* need this to remove svg padding bottom */
+}
+
+.preview-img__header__label {
+    font-size: 19px;
+    /* overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; */
+    font-weight: 500;
+    color: white;
+}
+
+.preview-img__snipped-big {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+}
+
+.preview-img__snipped-big__border {
+    display:grid;
+    justify-content: center;
+}
+
+.preview-img__snipped-big__border img {
+    height:100%;
+    object-fit: cover; 
+}
+
+
+.preview-img__caption {
+    justify-self: center;
+    align-self: end;
+    width: 75%;
+    display: grid;
+    grid-template-columns: auto 50px;
+    padding-right: .5rem;
+    margin-bottom:.75rem;
+    border-bottom: 2px solid #00bfa5ff;
+}
+
+.preview-img__caption input[type="text"] {
+    width: 100%;
+    padding: 0px 0px 3px;
+    margin: 6px 0px;
+    box-sizing: border-box;  
+    outline:none;
+    border:0;
+    background-color:inherit;
+    font-size: 1rem;
+}
+
+.preview-img__caption__emoji {
+    justify-self: right;
+}
+
+.preview-img__footer {
+    background-color: #d9d9d9ff;
+    display: grid;
+    grid-template-columns: 1fr 78px 78px 1fr;
+    grid-template-areas: ". img-small add-file btn-img-send";
+    gap: .25rem;
+    padding-top: 1.5rem;
+    padding-left: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-right: 2.5rem;
+    position: relative;
+}
+
+.preview-img__footer__img-small {
+    background-color: white;
+    padding:5px;
+    grid-area: img-small;
+    width: 100%;
+    height: 100%;
+}
+
+.preview-img__footer__img-small img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.preview-img__footer__addfile {
+    background-color: white;
+    padding:8px;
+    width: 100%;
+    grid-area: add-file;
+    display: grid;
+    align-items: center;
+    justify-self: center;
+    gap: .2rem;
+}
+
+.preview-img__footer__addfile__img {
+    justify-self: center;
+    align-self: end;
+    display: grid;
+}
+
+.preview-img__footer__addfile__label {
+    justify-self: center;
+    align-self: start;
+    font-size: .68rem;
+    font-weight: 600;
+    color: #00A5F4;
+}
+
+.preview-img__footer__button {
+    justify-self: end;
+    grid-area: btn-img-send;
+    padding: 0;
+    background-color: #09e85eff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,.4);
+    width: 60px;
+    height: 60px;
+    display:grid;
+    align-items: center;
+    justify-items: center;
+    position:absolute;
+    top: -55px;
+
+}
+
+.preview-img__footer__button-arrow {
+    display: grid;
+}
+
 
 .msg-input {
     grid-area: msg-input;
@@ -328,7 +491,7 @@ svg {
     padding: 0.5rem;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 20px;
     grid-template-areas: "s-msg"
                          "s-time";
 
@@ -344,7 +507,7 @@ svg {
     padding: 0.5rem;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 20px 1fr;
     grid-template-areas: "r-user"
                          "r-msg"
                          "r-time";
@@ -360,6 +523,11 @@ svg {
 .s-msg {
     grid-area: s-msg;
     font-size: .90rem;
+}
+
+.s-msg img {
+    max-width: 330px;
+    max-height: 249px;
 }
 
 .s-time {
@@ -388,6 +556,11 @@ svg {
 .r-msg {
     grid-area: r-msg;
     font-size: .90rem;
+}
+
+.r-msg img {
+    max-width: 330px;
+    max-height: 249px;
 }
 
 .r-time {

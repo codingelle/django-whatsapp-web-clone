@@ -1,0 +1,53 @@
+<div class="room-container__preview-img" >
+        <!-- msg chat header -->
+        <div class="msg-header mat-elevation-z6">
+            <div class="h-avatar"><img src="{{chatgroup.icon.url}}"></div>
+            <div class="h-users">
+                <div class="h-user-group">{{chatgroup.name|title}}</div>
+                <div class="h-user-member">{{participants}}</div>
+            </div>
+            <div class="h-search"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M15.9 14.3H15l-.3-.3c1-1.1 1.6-2.7 1.6-4.3 0-3.7-3-6.7-6.7-6.7S3 6 3 9.7s3 6.7 6.7 6.7c1.6 0 3.2-.6 4.3-1.6l.3.3v.8l5.1 5.1 1.5-1.5-5-5.2zm-6.2 0c-2.6 0-4.6-2.1-4.6-4.6s2.1-4.6 4.6-4.6 4.6 2.1 4.6 4.6-2 4.6-4.6 4.6z"></path></svg></div>
+            <div class="h-attach"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M1.816 15.556v.002c0 1.502.584 2.912 1.646 3.972s2.472 1.647 3.974 1.647a5.58 5.58 0 0 0 3.972-1.645l9.547-9.548c.769-.768 1.147-1.767 1.058-2.817-.079-.968-.548-1.927-1.319-2.698-1.594-1.592-4.068-1.711-5.517-.262l-7.916 7.915c-.881.881-.792 2.25.214 3.261.959.958 2.423 1.053 3.263.215l5.511-5.512c.28-.28.267-.722.053-.936l-.244-.244c-.191-.191-.567-.349-.957.04l-5.506 5.506c-.18.18-.635.127-.976-.214-.098-.097-.576-.613-.213-.973l7.915-7.917c.818-.817 2.267-.699 3.23.262.5.501.802 1.1.849 1.685.051.573-.156 1.111-.589 1.543l-9.547 9.549a3.97 3.97 0 0 1-2.829 1.171 3.975 3.975 0 0 1-2.83-1.173 3.973 3.973 0 0 1-1.172-2.828c0-1.071.415-2.076 1.172-2.83l7.209-7.211c.157-.157.264-.579.028-.814L11.5 4.36a.572.572 0 0 0-.834.018l-7.205 7.207a5.577 5.577 0 0 0-1.645 3.971z"></path></svg></div>
+            <div class="h-menu"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 15z"></path></svg></div>
+        </div>
+        <!-- msg chat header -->
+        
+        <div id='room-preview-img' class="preview-img-box preview-img">
+
+            <div class="preview-img__header">
+                <div class="preview-img__header__close"><svg xmlns="http://www.w3.org/2000/svg" id="btnClosePreviewImg" viewBox="0 0 24 24" width="24" height="24" preserveAspectRatio="none" ><path fill="#b0ebe2ff" d="M19.1 17.2l-5.3-5.3 5.3-5.3-1.8-1.8-5.3 5.4-5.3-5.3-1.8 1.7 5.3 5.3-5.3 5.3L6.7 19l5.3-5.3 5.3 5.3 1.8-1.8z"></path></svg></div>
+                <div class="preview-img__header__label">Preview</div>
+            </div>
+
+            <div class="preview-img__snipped-big">
+                <div class='preview-img__snipped-big__border'><img id='snipped-big-img' ></div>
+            </div>
+
+            <div class="preview-img__caption">
+                <span class='preview-img__caption__add'><input id='add-caption-input' type="text" placeholder="Add a caption..."></span>
+                <span class='preview-img__caption__emoji'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20"><path fill="currentColor" d="M9.5 1.7C4.8 1.7 1 5.5 1 10.2s3.8 8.5 8.5 8.5 8.5-3.8 8.5-8.5-3.8-8.5-8.5-8.5zm0 15.9c-4.1 0-7.4-3.3-7.4-7.4s3.3-7.4 7.4-7.4 7.4 3.3 7.4 7.4-3.3 7.4-7.4 7.4z"></path><path fill="currentColor" d="M6.8 9.8c.7-.1 1.2-.7 1.1-1.4-.1-.6-.5-1.1-1.1-1.1-.7 0-1.2.7-1.1 1.4 0 .6.5 1 1.1 1.1zM13.9 11.6c-1.4.2-2.9.3-4.4.4-1.5 0-2.9-.1-4.4-.4-.2 0-.4.1-.4.3v.2c.9 1.8 2.7 2.9 4.7 3 2-.1 3.8-1.2 4.8-3 .1-.2 0-.4-.1-.5h-.2zm-4.1 2c-2.3 0-3.5-.8-3.7-1.4 2.3.4 4.6.4 6.9 0 0 .1-.4 1.4-3.2 1.4zM12.2 9.8c.7-.1 1.2-.7 1.1-1.4-.1-.6-.5-1.1-1.1-1.1-.7 0-1.2.7-1.1 1.4.1.6.5 1 1.1 1.1z"></path></svg></span>
+            </div>
+
+            <div class='preview-img__footer'>
+
+                <div class="preview-img__footer__img-small">
+                    <img id='snipped-small-img'>
+                </div>
+
+                <div class="preview-img__footer__addfile">
+                    <div class="preview-img__footer__addfile__img">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" preserveAspectRatio="none"><path fill="#00A5F4" d="M20 13.5h-6.5V20h-2.9v-6.5H4v-2.9h6.5V4h2.9v6.5H20v3z"></path></svg>
+                    </div>
+                    <div class="preview-img__footer__addfile__label">
+                        ADD FILE
+                    </div>
+                </div>
+                <div class="preview-img__footer__button">
+                    <div class="preview-img__footer__button-arrow">
+                        <svg id='btnSendImg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" preserveAspectRatio="none" width="24" height="24"><path fill="white" d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>

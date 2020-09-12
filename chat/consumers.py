@@ -32,6 +32,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data=None, bytes_data=None):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
+        image_caption = text_data_json['image_caption']
+        message_type = text_data_json['message_type']
 
         # Send message to room group
         await self.channel_layer.group_send(
@@ -39,7 +41,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
             {
                 'type': 'chat_message',
                 'username': self.scope['user'].username.title(),
-                'message': message
+                'message': message,
+                'message_type': message_type,
+                'image_caption': image_caption
             }
         )
 
@@ -48,9 +52,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
         """ exhange message here """
         message = event['message']
         username = event['username']
+        image_caption = event['image_caption']
+        message_type = event['message_type']
 
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
             'message': message,
-            'username': username
+            'username': username,
+            'image_caption': image_caption,
+            'message_type': message_type
         }))
