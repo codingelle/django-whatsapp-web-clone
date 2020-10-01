@@ -17,4 +17,4 @@ async def chat_save_message(user_id, group_id, message, message_type, image_capt
                             image_caption=image_caption
                        )
     
-    #await Tortoise.close_connections()
+    await Tortoise.close_connections()
