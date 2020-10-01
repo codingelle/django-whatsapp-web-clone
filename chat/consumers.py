@@ -1,6 +1,9 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 #from asgiref.sync import await_to_sync
+from chat.services import chat_save_message
+
+
 
 class ChatConsumer(AsyncWebsocketConsumer):
     """ handshake websocket front end """
@@ -19,6 +22,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
 
         await self.accept()
+
 
     async def disconnect(self, code):
         # Leave room group
@@ -46,6 +50,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'image_caption': image_caption
             }
         )
+
+        await chat_save_message(
+            user_id=self.scope['user'].id,
+            group_id=self.room_name,
+            message=message,
+            message_type=message_type,
+            image_caption=image_caption
+        )
+
 
     # Receive message from room group
     async def chat_message(self, event):

@@ -134,3 +134,11 @@ CHANNEL_LAYERS = {
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'django_channel_tutorial/media')
+
+
+TORTOISE_INIT = {
+    "db_url": "sqlite://db.sqlite3.tortoise",
+    "modules" : {
+        "models": ["chat.tortoise_models"]
+     }
+}
