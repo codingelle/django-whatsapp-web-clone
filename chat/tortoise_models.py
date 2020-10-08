@@ -12,7 +12,7 @@ class ChatMessage(Model):
     message = fields.TextField()
     message_type = fields.CharField(max_length=50, null=True)
     image_caption = fields.CharField(max_length=50, null=True)
-    date_created = fields.DatetimeField(null=True)
+    date_created = fields.DatetimeField(null=True, auto_now_add=True)
 
     class Meta:
         table = 'chat_chatmessage'
