@@ -53,10 +53,10 @@ def unauthorized(request):
     return render(request, 'chat/unauthorized.html', {})
 
 
-async def history(request):
+async def history(request, room_id):
 
     await Tortoise.init(**settings.TORTOISE_INIT)
-    chat_message = await ChatMessage.all().values()
+    chat_message = await ChatMessage.filter(room_id=room_id).values()
     await Tortoise.close_connections()
 
     return await sync_to_async(JsonResponse)(chat_message, safe=False)

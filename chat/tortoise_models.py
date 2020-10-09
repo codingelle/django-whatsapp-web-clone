@@ -7,8 +7,8 @@ class ChatMessage(Model):
         make used of tortoise ORM since its support asyncio ORM
     """ 
     id = fields.IntField(pk=True)
-    group_id = fields.IntField(null=True)
-    user_id = fields.IntField(null=True)
+    room_id = fields.IntField(null=True)
+    username = fields.CharField(max_length=50, null=True)
     message = fields.TextField()
     message_type = fields.CharField(max_length=50, null=True)
     image_caption = fields.CharField(max_length=50, null=True)

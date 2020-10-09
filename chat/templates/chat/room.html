@@ -116,7 +116,6 @@
         
         document.querySelector('#chat-message-input').onpaste = function(e) {
             let item = e.clipboardData.items[0];
-            console.log(item);
             if (item.type.includes('image')) {
                 let blob = item.getAsFile();
 
@@ -139,18 +138,21 @@
             msgbox.scrollTop = msgbox.scrollHeight
         }
 
-        function getTime() {
-            let today = new Date();
+        function getTime(msg_time) {
+            if (msg_time) {
+                var today = new Date(msg_time);
+            } else {
+                var today = new Date();
+            }
             let time = today.toLocaleString([], { hour: '2-digit', minute: '2-digit' });
             return time
 
         }
     
-        function broadcastMessage(msg, user, msg_type, img_caption) { 
+        function broadcastMessage(msg, user, msg_type, img_caption, msg_time) { 
             // create a new div element 
             let newDiv = document.createElement("div"); 
             // and give it some content 
-            console.log(msg_type, 'broadcastMessage')
             if (msg_type == 'image') {
                 msg = `<img src="${msg}"> <br/> ${img_caption}`;
             }
@@ -159,7 +161,7 @@
                 var msg1 = `<div class="right-msg-container">
                                 <div class="s-message">
                                     <div class="s-msg">${msg}</div>
-                                    <div class="s-time">${getTime()}</div>
+                                    <div class="s-time">${getTime(msg_time)}</div>
                                 </div>
                                 <div class="s-tail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 13" preserveAspectRatio="none" width="8" height="13"><path opacity=".5" d="M5.188 1H0v11.193l6.467-8.625C7.526 2.156 6.958 1 5.188 1z"></path><path fill="#dcf8c6ff" d="M5.188 0H0v11.193l6.467-8.625C7.526 1.156 6.958 0 5.188 0z"></path></svg></div>
                             </div>`
@@ -169,7 +171,7 @@
                                 <div class="r-message" >
                                     <div class="r-user"><a href="#">${user}</a></div>
                                     <div class="r-msg">${msg}</div>
-                                    <div class="r-time">${getTime()}</div>
+                                    <div class="r-time">${getTime(msg_time)}</div>
                                 </div>
                             </div>`
             }
@@ -231,6 +233,18 @@
                 'image_caption': document.querySelector('#add-caption-input').value
             }));
         }
+
+        function loadMessage() {
+            fetch("{% url 'chat:history' chatgroup.id %}")
+                .then( response => response.json() )
+                .then( data => {
+                    for (let msg of data) {
+                        broadcastMessage(msg.message, msg.username, msg.message_type, msg.image_caption, msg.date_created)
+                    }
+                    scrollBottom()
+                })
+        }
+        loadMessage()
 
     </script>
 {% endblock content %}
