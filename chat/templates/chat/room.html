@@ -140,10 +140,16 @@
 
         function getTime(msg_time) {
             if (msg_time) {
-                var today = new Date(msg_time);
+                // define as Date so we can convert to acceptable date time format (with out letter T, ex. 2020-10-10T06:50:14.751 )
+                temp = new Date(msg_time); 
+
+                // suffix UTC so it will render as local time when it use toLocalString
+                var today = new Date(`${temp.toLocaleString()} UTC`); 
             } else {
                 var today = new Date();
             }
+
+            // format & render to local time
             let time = today.toLocaleString([], { hour: '2-digit', minute: '2-digit' });
             return time
 
