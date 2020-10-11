@@ -84,6 +84,7 @@
     <script>
         
         const roomId = '{{chatgroup.id}}'
+        var tempDaysWeekdays = [];
 
         const chatSocket = new WebSocket(
             `ws://${window.location.host}/ws/chat/${roomId}/`
@@ -181,6 +182,12 @@
                                 </div>
                             </div>`
             }
+            
+            if (msg_time) {
+                showDatesWeekDays(msg_time)
+            } else {
+                showDatesWeekDays(new Date())
+            }
 
             newDiv.innerHTML = msg1;  
 
@@ -238,6 +245,45 @@
                 'message_type': 'image',
                 'image_caption': document.querySelector('#add-caption-input').value
             }));
+        }
+
+
+        function showDatesWeekDays(date_created) {
+            // add the newly created element and its content into the DOM 
+            
+            dt = new Date(date_created)
+
+            if (!tempDaysWeekdays.includes(dt.toLocaleDateString())) {
+                let newDiv = document.createElement("div"); 
+                let currentDiv = document.getElementById("new-message-chat"); 
+                let parentDiv = currentDiv.parentNode;
+                let days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']; 
+
+                if (dt.toDateString() == new Date().toDateString()) {
+                    // display TODAY in message
+                    date_weekday = 'TODAY';
+                } else if(dt > getDateBefore()) {
+                    // display week day in message
+                    date_weekday = days[dt.getDay()].toUpperCase()
+                } else {
+                    // display date in message
+                    date_weekday = dt.toLocaleDateString();
+                }
+
+                newDiv.style.display = "grid";
+                newDiv.innerHTML = `<div class="date_weekday">${date_weekday}</div>`
+                parentDiv.insertBefore(newDiv, currentDiv); 
+
+                tempDaysWeekdays.push(dt.toLocaleDateString())
+            }
+
+        }
+        
+        function getDateBefore(days=7) {
+            // calculate the last 7 days date
+            // 7 (days) * 24 (hours) * 60 (minutes) * 60 (seconds) * 1000 (milliseconds ) = 604800000 or 7 days in milliseconds.                
+            daysInMs= days * 24 * 60 * 60 * 1000
+            return new Date(Date.now() - daysInMs)
         }
 
         function loadMessage() {

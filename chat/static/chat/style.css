@@ -581,3 +581,14 @@ svg {
     font-size: .93rem;
 }
 
+.date_weekday {
+    display: grid;
+    justify-self: center;
+    padding: 5px 12px 6px;
+    font-size: 0.78rem;
+    background-color: #e1f3faff;
+    border-radius: 7.5px;
+    width: fit-content;
+    box-shadow: 0 1px .5px rgba(0,0,0,.13);
+    line-height: 21px;
+}
