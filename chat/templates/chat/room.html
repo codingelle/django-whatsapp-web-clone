@@ -84,6 +84,7 @@
     <script>
         
         const roomId = '{{chatgroup.id}}'
+        var tempDaysWeekdays = [];
 
         const chatSocket = new WebSocket(
             `ws://${window.location.host}/ws/chat/${roomId}/`
@@ -116,7 +117,6 @@
         
         document.querySelector('#chat-message-input').onpaste = function(e) {
             let item = e.clipboardData.items[0];
-            console.log(item);
             if (item.type.includes('image')) {
                 let blob = item.getAsFile();
 
@@ -139,18 +139,27 @@
             msgbox.scrollTop = msgbox.scrollHeight
         }
 
-        function getTime() {
-            let today = new Date();
+        function getTime(msg_time) {
+            if (msg_time) {
+                // define as Date so we can convert to acceptable date time format (with out letter T, ex. 2020-10-10T06:50:14.751 )
+                temp = new Date(msg_time); 
+
+                // suffix UTC so it will render as local time when it use toLocalString
+                var today = new Date(`${temp.toLocaleString()} UTC`); 
+            } else {
+                var today = new Date();
+            }
+
+            // format & render to local time
             let time = today.toLocaleString([], { hour: '2-digit', minute: '2-digit' });
             return time
 
         }
     
-        function broadcastMessage(msg, user, msg_type, img_caption) { 
+        function broadcastMessage(msg, user, msg_type, img_caption, msg_time) { 
             // create a new div element 
             let newDiv = document.createElement("div"); 
             // and give it some content 
-            console.log(msg_type, 'broadcastMessage')
             if (msg_type == 'image') {
                 msg = `<img src="${msg}"> <br/> ${img_caption}`;
             }
@@ -159,7 +168,7 @@
                 var msg1 = `<div class="right-msg-container">
                                 <div class="s-message">
                                     <div class="s-msg">${msg}</div>
-                                    <div class="s-time">${getTime()}</div>
+                                    <div class="s-time">${getTime(msg_time)}</div>
                                 </div>
                                 <div class="s-tail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 13" preserveAspectRatio="none" width="8" height="13"><path opacity=".5" d="M5.188 1H0v11.193l6.467-8.625C7.526 2.156 6.958 1 5.188 1z"></path><path fill="#dcf8c6ff" d="M5.188 0H0v11.193l6.467-8.625C7.526 1.156 6.958 0 5.188 0z"></path></svg></div>
                             </div>`
@@ -169,9 +178,15 @@
                                 <div class="r-message" >
                                     <div class="r-user"><a href="#">${user}</a></div>
                                     <div class="r-msg">${msg}</div>
-                                    <div class="r-time">${getTime()}</div>
+                                    <div class="r-time">${getTime(msg_time)}</div>
                                 </div>
                             </div>`
+            }
+            
+            if (msg_time) {
+                showDatesWeekDays(msg_time)
+            } else {
+                showDatesWeekDays(new Date())
             }
 
             newDiv.innerHTML = msg1;  
@@ -231,6 +246,57 @@
                 'image_caption': document.querySelector('#add-caption-input').value
             }));
         }
+
+
+        function showDatesWeekDays(date_created) {
+            // add the newly created element and its content into the DOM 
+            
+            dt = new Date(date_created)
+
+            if (!tempDaysWeekdays.includes(dt.toLocaleDateString())) {
+                let newDiv = document.createElement("div"); 
+                let currentDiv = document.getElementById("new-message-chat"); 
+                let parentDiv = currentDiv.parentNode;
+                let days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']; 
+
+                if (dt.toDateString() == new Date().toDateString()) {
+                    // display TODAY in message
+                    date_weekday = 'TODAY';
+                } else if(dt > getDateBefore()) {
+                    // display week day in message
+                    date_weekday = days[dt.getDay()].toUpperCase()
+                } else {
+                    // display date in message
+                    date_weekday = dt.toLocaleDateString();
+                }
+
+                newDiv.style.display = "grid";
+                newDiv.innerHTML = `<div class="date_weekday">${date_weekday}</div>`
+                parentDiv.insertBefore(newDiv, currentDiv); 
+
+                tempDaysWeekdays.push(dt.toLocaleDateString())
+            }
+
+        }
+        
+        function getDateBefore(days=7) {
+            // calculate the last 7 days date
+            // 7 (days) * 24 (hours) * 60 (minutes) * 60 (seconds) * 1000 (milliseconds ) = 604800000 or 7 days in milliseconds.                
+            daysInMs= days * 24 * 60 * 60 * 1000
+            return new Date(Date.now() - daysInMs)
+        }
+
+        function loadMessage() {
+            fetch("{% url 'chat:history' chatgroup.id %}")
+                .then( response => response.json() )
+                .then( data => {
+                    for (let msg of data) {
+                        broadcastMessage(msg.message, msg.username, msg.message_type, msg.image_caption, msg.date_created)
+                    }
+                    scrollBottom()
+                })
+        }
+        loadMessage()
 
     </script>
 {% endblock content %}

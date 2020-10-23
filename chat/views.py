@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
+from asgiref.sync import sync_to_async
+from tortoise import Tortoise
+from django.conf import settings
 
 # Create your views here.
 
 # chat/views.py
 from django.shortcuts import render
 from .models import ChatGroup
+from .tortoise_models import ChatMessage
 
 @login_required
 def index(request):
@@ -47,3 +51,12 @@ def room(request, group_id):
 @login_required
 def unauthorized(request):
     return render(request, 'chat/unauthorized.html', {})
+
+
+async def history(request, room_id):
+
+    await Tortoise.init(**settings.TORTOISE_INIT)
+    chat_message = await ChatMessage.filter(room_id=room_id).order_by('date_created').values()
+    await Tortoise.close_connections()
+
+    return await sync_to_async(JsonResponse)(chat_message, safe=False)
