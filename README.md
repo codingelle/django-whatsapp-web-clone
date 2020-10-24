@@ -10,6 +10,10 @@
 ![image](https://user-images.githubusercontent.com/3206118/93725153-66407300-fbdf-11ea-9c6e-be0ddaab869d.png)
 
 
+## Screenshot Loading & Save message
+![image](https://user-images.githubusercontent.com/3206118/97063435-4df2b800-15d2-11eb-9ea9-abedad56a493.png)
+
+
 
 ## Installation
 ```
