@@ -17,7 +17,7 @@
 
 ## Installation
 ```
-cd django-whatsapp-web-clone/requirements
+cd django-whatsapp-web-clone/
 
 python3 -m pip install requirements
 
