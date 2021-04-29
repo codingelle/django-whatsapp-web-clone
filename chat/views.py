@@ -13,10 +13,6 @@ from django.shortcuts import render
 from .models import ChatGroup
 from .tortoise_models import ChatMessage
 
-@login_required
-def index(request):
-    return render(request, 'chat/index.html', {})
-
 def get_participants(group_id=None, group_obj=None, user=None):
     """ function to get all participants that belong the specific group """
     
@@ -35,8 +31,10 @@ def get_participants(group_id=None, group_obj=None, user=None):
 
 @login_required
 def room(request, group_id):
+    chatgroup = ChatGroup.objects.get(id=group_id)
+    chatgroup.user_set.add(request.user)
     if request.user.groups.filter(id=group_id).exists():
-        chatgroup = ChatGroup.objects.get(id=group_id)
+        
         #TODO: make sure user assigned to existing group
         assigned_groups = list(request.user.groups.values_list('id', flat=True))
         groups_participated = ChatGroup.objects.filter(id__in=assigned_groups)
@@ -47,11 +45,6 @@ def room(request, group_id):
         })
     else:
         return HttpResponseRedirect(reverse("chat:unauthorized"))
-
-@login_required
-def unauthorized(request):
-    return render(request, 'chat/unauthorized.html', {})
-
 
 async def history(request, room_id):
 

@@ -122,6 +122,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'django_channel_tutorial/static')]
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 ASGI_APPLICATION = "django_channel_tutorial.routing.application"
 CHANNEL_LAYERS = {
     'default': {

@@ -1,11 +1,14 @@
-{% extends 'base.html' %}
 {% load static %}
-
-{% block app_css %}
-    <link href="{% static 'chat/style.css' %}" rel="stylesheet" type="text/css" />
-{% endblock app_css %}
-
-{% block content %}
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Django Whatsapp</title>
+        <link href="{% static 'chat/style.css' %}" rel="stylesheet" type="text/css" />
+        
+    </head>
+    <body>
         <div class="main-container">
             <div class="room-sidebar">
                 <!-- room side bar header-->
@@ -81,7 +84,8 @@
 
         </div>
 
-    <script>
+
+        <script>
         
         const roomId = '{{chatgroup.id}}'
         var tempDaysWeekdays = [];
@@ -299,4 +303,5 @@
         loadMessage()
 
     </script>
-{% endblock content %}
+    </body>
+</html>
