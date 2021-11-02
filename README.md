@@ -30,9 +30,9 @@ python3 -m pip install requirements
 python3 manage.py migrate
 ```
 
-#### start redis service
+#### start redis service using podman
 ```
-docker run -p 6379:6379 -d redis:5
+podman run -p 6379:6379 -d redis:5
 ```
 
 #### run the development server
