@@ -19,7 +19,9 @@
 ```
 cd django-whatsapp-web-clone/
 
-python3 -m pip install requirements
+python3.7 -m venv env
+. env/bin/activate
+pip install -r requirements
 
 ```
 
@@ -27,7 +29,12 @@ python3 -m pip install requirements
 
 #### create all the required tables
 ```
-python3 manage.py migrate
+python manage.py migrate
+```
+
+#### create superuser
+```
+python manage.py createsuperuser
 ```
 
 #### start redis service using podman
