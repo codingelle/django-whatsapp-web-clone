@@ -1,7 +1,14 @@
+{% load static %}
 <div class="room-container__preview-img" >
         <!-- msg chat header -->
         <div class="msg-header mat-elevation-z6">
-            <div class="h-avatar"><img src="{{chatgroup.icon.url}}"></div>
+            <div class="h-avatar">
+		   {% if chatgroup.icon %}
+		    <img src="{{chatgroup.icon.url}}">
+		   {% else %}
+                    <img src="{% static 'chat/default_group.png' %}" alt="Default Profile">
+		   {% endif %}
+	    </div>
             <div class="h-users">
                 <div class="h-user-group">{{chatgroup.name|title}}</div>
                 <div class="h-user-member">{{participants}}</div>

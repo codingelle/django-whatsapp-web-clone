@@ -58,7 +58,11 @@
                 {% for grp in groups_participated %}
             <div class="room-sidebar-groups" onclick="redirect('{{grp.get_absolute_url}}')">
                         <div class="room-sidebar-groups-g-img">
-                            <img src="{{ grp.icon.url }}" alt="Default Profile">
+			    {% if grp.icon %}
+			      <img src="{{ grp.icon.url }}" >
+			    {% else %}
+                              <img src="{% static 'chat/default_group.png' %}" alt="Default Profile">
+			    {% endif %}
                         </div>
                         <div class="room-sidebar-groups-g-msg">
                             <span class="room-sidebar-groups-g-msg1">{{grp.name|title}}</span>
