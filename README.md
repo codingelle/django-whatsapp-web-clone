@@ -1,5 +1,6 @@
 # A WhatsApp Web Clone Chat Application for those developers that like to use Django Channel for handling WebSocket request
 
+[![Django CI](https://github.com/codingelle/django-whatsapp-web-clone/actions/workflows/django.yml/badge.svg)](https://github.com/codingelle/django-whatsapp-web-clone/actions/workflows/django.yml)
 
 ## Screenshot of 2 users exchanging message
 
