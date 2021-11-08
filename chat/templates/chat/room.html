@@ -83,6 +83,10 @@
                 {% include 'chat/room_preview_image.html' %} 
             </div>
 
+            <div id='room-search-gif' style='display:none' >
+                {% include 'chat/room_search_gif.html' %} 
+            </div>
+
         </div>
 
     <script>
@@ -226,6 +230,7 @@
         function goRoomMsg() {
             document.querySelector('#room-message').style.display = 'grid';
             document.querySelector('#room-preview-img').style.display = 'none';
+            document.querySelector('#room-search-gif').style.display = 'none';
             document.getElementById("snipped-big-img").src = '';
             document.getElementById("snipped-small-img").src = '';
             document.querySelector('#add-caption-input').value = '';
@@ -301,6 +306,11 @@
                 })
         }
         loadMessage()
+
+        document.getElementById('btnGif').addEventListener('click', e => {
+            document.querySelector('#room-search-gif').style.display = 'grid';
+            document.querySelector('#room-message').style.display = 'none';
+        })
 
     </script>
 {% endblock content %}
