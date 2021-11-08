@@ -215,8 +215,8 @@
     grid-area: msg-header;
     background-color: #EDEDED;
     display: grid;
-    grid-template-columns: 42px auto 37px 37px 37px;
-    grid-template-areas: "h-avatar h-users h-search h-attach h-menu" ;
+    grid-template-columns: 42px auto 37px 37px;
+    grid-template-areas: "h-avatar h-users h-search h-menu" ;
     align-items:center;
     gap: .7rem;
     padding: 0 1rem;
@@ -268,9 +268,6 @@ svg {
     cursor: pointer;
 }
 
-.h-attach {
-    grid-area: h-attach;
-}
 
 .h-menu {
     grid-area: h-menu;
@@ -439,8 +436,8 @@ svg {
     grid-area: msg-input;
     padding: 1rem;
     display: grid;
-    grid-template-columns: 40px auto 40px;
-    grid-template-areas: "emoji type-a-message mic";
+    grid-template-columns: 40px 40px auto 40px;
+    grid-template-areas: "emoji gif type-a-message mic";
     align-content: center;
     background-color: #f0f0f0ff;
 }
@@ -452,6 +449,12 @@ svg {
     align-self:center;
 }
 
+.gif {
+    grid-area: gif;
+    padding: 0.5rem;
+    justify-self: center;
+    align-self:center;
+}
 
 .type-a-message {
     grid-area: type-a-message;
