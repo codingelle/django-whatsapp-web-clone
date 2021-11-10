@@ -83,10 +83,6 @@
                 {% include 'chat/room_preview_image.html' %} 
             </div>
 
-            <div id='room-search-gif' style='display:none' >
-                {% include 'chat/room_search_gif.html' %} 
-            </div>
-
         </div>
 
     <script>
@@ -308,8 +304,13 @@
         loadMessage()
 
         document.getElementById('btnGif').addEventListener('click', e => {
-            document.querySelector('#room-search-gif').style.display = 'grid';
-            document.querySelector('#room-message').style.display = 'none';
+            document.querySelector('.giphy-search').style.display = 'grid';
+            document.getElementById('btnClose').style.display = 'grid';
+        })
+
+        document.getElementById('btnClose').addEventListener('click', e => {
+            //document.querySelector('.close').style.display = 'none';
+            document.querySelector('.giphy-search').style.display = 'none';
         })
 
     </script>

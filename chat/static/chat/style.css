@@ -192,9 +192,10 @@
     min-height: 99vh;
     height:99vh;
     grid-template-columns: 1fr;
-    grid-template-rows: 59px auto 62px;
+    grid-template-rows: 59px auto auto 62px;
     grid-template-areas: "msg-header"
                          "msg-box"
+                         "giphy-search"
                          "msg-input";
 }
 
@@ -277,6 +278,43 @@ svg {
     grid-area: msg-box;
     padding-left:4rem;
     padding-right:4rem;
+}
+
+.giphy-search {
+    background-color: #F0F0F0;
+    grid-area: giphy-search;
+    height: 350px;
+    display: grid;
+    grid-template-rows: 62px auto;
+    grid-template-columns: 1fr;
+    grid-template-areas: "ginput"
+                         "gresults";
+    padding: 1rem;
+
+
+}
+
+.giphy-search__input input[type=text] {
+    display: grid;
+    grid-area: ginput;
+    width: 100%;
+    background-color: #e7e5e5;
+    padding: 10px 12px;
+    box-sizing: border-box;  
+    outline:none;
+    border-radius: 4px;
+    border:0;
+    font-size: .93rem;
+}
+
+.giphy-search__results {
+    display: grid;
+    grid-area: gresults;
+    overflow-y: auto;
+    overflow-x: hidden;
+    gap: .5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    max-height: 350px;
 }
 
 .msg-box--background {
@@ -436,10 +474,17 @@ svg {
     grid-area: msg-input;
     padding: 1rem;
     display: grid;
-    grid-template-columns: 40px 40px auto 40px;
-    grid-template-areas: "emoji gif type-a-message mic";
+    grid-template-columns: 40px 40px 40px auto 40px;
+    grid-template-areas: "close emoji gif type-a-message mic";
     align-content: center;
     background-color: #f0f0f0ff;
+}
+
+.close {
+    grid-area: close;
+    padding: 0.5rem;
+    justify-self: center;
+    align-self:center;
 }
 
 .emoji {
