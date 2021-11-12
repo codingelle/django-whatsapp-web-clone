@@ -304,6 +304,7 @@
         loadMessage()
 
         document.getElementById('btnGif').addEventListener('click', e => {
+            loadGif();
             document.querySelector('.giphy-search').style.display = 'grid';
             document.getElementById('btnClose').style.display = 'grid';
         })
@@ -312,6 +313,24 @@
             //document.querySelector('.close').style.display = 'none';
             document.querySelector('.giphy-search').style.display = 'none';
         })
+
+        function loadGif() {
+            fetch('https://api.giphy.com/v1/gifs/trending?api_key=5L574E3Sj6TkeEBv58KYkJu74az1S7vH').then(
+                response => response.json()
+            ).then(
+                data => {
+                    const gifList = data.data.map(res => res.images.fixed_height);
+                    const gif2img = [];
+                    gifList.forEach( res => {
+                        gif2img.push(`
+                            <img style="width:${res.width}px;object-fit:cover;cursor:pointer" src="${res.url}"/>
+                        `)
+                    })
+                    document.querySelector('.giphy-search__results').innerHTML = gif2img.join("");
+                }
+            );
+        }
+
 
     </script>
 {% endblock content %}
