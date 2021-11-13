@@ -253,6 +253,7 @@
         }
 
 
+
         function showDatesWeekDays(date_created) {
             // add the newly created element and its content into the DOM 
             
@@ -314,7 +315,7 @@
             document.querySelector('.giphy-search').style.display = 'none';
         })
 
-        function loadGif() {
+        const loadGif = () => {
             fetch('https://api.giphy.com/v1/gifs/trending?api_key=5L574E3Sj6TkeEBv58KYkJu74az1S7vH').then(
                 response => response.json()
             ).then(
@@ -322,15 +323,24 @@
                     const gifList = data.data.map(res => res.images.fixed_height);
                     const gif2img = [];
                     gifList.forEach( res => {
-                        gif2img.push(`
-                            <img style="width:${res.width}px;object-fit:cover;cursor:pointer" src="${res.url}"/>
-                        `)
+                        gif2img.push(`<img 
+                            onClick="previewGif('${res.url}')"
+                            style="width:${res.width}px;object-fit:cover;cursor:pointer" 
+                            src="${res.url}"
+                        />`)
                     })
                     document.querySelector('.giphy-search__results').innerHTML = gif2img.join("");
                 }
             );
         }
 
+        const previewGif = (imgRes) => {
+            document.getElementById("snipped-big-img").src = imgRes;
+            document.getElementById('snipped-small-img').src = imgRes;
+            document.querySelector('#room-preview-img').style.display = 'grid';
+            document.querySelector('#room-message').style.display = 'none';
+            document.querySelector('#add-caption-input').focus();
+        }
 
     </script>
 {% endblock content %}
