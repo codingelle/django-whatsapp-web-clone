@@ -48,6 +48,15 @@ python manage.py createsuperuser
 podman run -p 6379:6379 -d redis:5
 ```
 
+### create .env file 
+
+add the following variable & replace it based on your own development keys
+
+API_KEY=YourOwnGiphYAPIKeysdfasjfdgdf
+
+SECRET_KEY=YourOwnSecretKey71041jkfohdslflasdfjhaljdfa
+
+
 #### run the development server
 ```
 python3 manage.py runserver
