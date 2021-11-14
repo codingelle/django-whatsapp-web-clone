@@ -315,8 +315,27 @@
             document.querySelector('.giphy-search').style.display = 'none';
         })
 
-        const loadGif = () => {
-            fetch('https://api.giphy.com/v1/gifs/trending?api_key=5L574E3Sj6TkeEBv58KYkJu74az1S7vH').then(
+        document.getElementById('searchGifs').addEventListener('input', e => {
+            console.log(e.target.value);
+            loadGif(e.target.value);
+
+        })
+            
+        const giphyUrl = '{{GIPHY_URL}}';
+        const apiKey = '{{API_KEY}}';
+
+        const loadGif = (searchBy) => {
+
+            let url;
+            document.querySelector('.giphy-search__results').innerHTML = '';
+
+            if (searchBy) {
+                url = `${giphyUrl}/search?api_key=${apiKey}&q=${searchBy}`;
+            } else {
+                url = `${giphyUrl}/trending?api_key=${apiKey}`;
+            }
+
+            fetch(url).then(
                 response => response.json()
             ).then(
                 data => {

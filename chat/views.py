@@ -43,7 +43,9 @@ def room(request, group_id):
         return render(request, 'chat/room.html', {
             'chatgroup': chatgroup,
             'participants': get_participants(group_obj=chatgroup, user=request.user.username),
-            'groups_participated': groups_participated
+            'groups_participated': groups_participated,
+            'GIPHY_URL': settings.GIPHY_URL,
+            'API_KEY': settings.API_KEY
         })
     else:
         return HttpResponseRedirect(reverse("chat:unauthorized"))

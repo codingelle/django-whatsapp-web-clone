@@ -25,6 +25,7 @@ pycparser==2.20
 PyHamcrest==2.0.2
 pyOpenSSL==19.1.0
 PyPika==0.42.1
+python-dotenv==0.19.2
 pytz==2020.1
 service-identity==18.1.0
 six==1.15.0
