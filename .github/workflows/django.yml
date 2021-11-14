@@ -28,7 +28,8 @@ jobs:
     - name: Setup Environment
       env: 
         SECRET_KEY: ${{ env.SECRET_KEY }}
-        API_KEY: ${{ env.API_KEY }}    
+        API_KEY: ${{ env.API_KEY }}  
+      run: echo "$SECRET_KEY"
     - name: Run Tests
       run: |
         python manage.py test
