@@ -316,18 +316,17 @@
         })
 
         document.getElementById('searchGifs').addEventListener('input', e => {
-            console.log(e.target.value);
             loadGif(e.target.value);
-
         })
             
         const giphyUrl = '{{GIPHY_URL}}';
         const apiKey = '{{API_KEY}}';
 
-        const loadGif = (searchBy) => {
+        const loadGif = async (searchBy) => {
 
             let url;
-            document.querySelector('.giphy-search__results').innerHTML = '';
+            const docResults = document.querySelector('.giphy-search__results');
+            docResults.innerHTML = 'Loading...';
 
             if (searchBy) {
                 url = `${giphyUrl}/search?api_key=${apiKey}&q=${searchBy}`;
@@ -335,22 +334,21 @@
                 url = `${giphyUrl}/trending?api_key=${apiKey}`;
             }
 
-            fetch(url).then(
-                response => response.json()
-            ).then(
-                data => {
-                    const gifList = data.data.map(res => res.images.fixed_height);
-                    const gif2img = [];
-                    gifList.forEach( res => {
-                        gif2img.push(`<img 
-                            onClick="previewGif('${res.url}')"
-                            style="width:${res.width}px;object-fit:cover;cursor:pointer" 
-                            src="${res.url}"
-                        />`)
-                    })
-                    document.querySelector('.giphy-search__results').innerHTML = gif2img.join("");
-                }
-            );
+            const response = await fetch(url);
+            const gifs = await response.json();
+
+            const gifList = gifs.data.map(res => res.images.fixed_height);
+            const gif2img = [];
+            docResults.innerHTML = '';
+            gifList.forEach( res => {
+                docResults.innerHTML += `<img 
+                    onClick="previewGif('${res.url}')"
+                    style="width:${res.width}px;cursor:pointer" 
+                    src="${res.url}"
+                />`
+            })
+            //docResults.innerHTML = gif2img.join("");
+
         }
 
         const previewGif = (imgRes) => {
