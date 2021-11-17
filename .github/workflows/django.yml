@@ -10,6 +10,14 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          PSQL_PASS: 12345
+          PSQL_USER: user       
     strategy:
       max-parallel: 4
       matrix:
@@ -29,5 +37,10 @@ jobs:
       env: 
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
         API_KEY: ${{ secrets.API_KEY }}  
+        DJANGO_SUPERUSER_PASSWORD: admin
+        DJANGO_SUPERUSER_USERNAME: admin
+        DJANGO_SUPERUSER_EMAIL: admin@gmail.com
       run: |
+        python manage.py createsuperuser --no-input
+        python manage.py migrate
         python manage.py test
