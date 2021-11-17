@@ -136,7 +136,7 @@ CHANNEL_LAYERS = {
 }
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'django_channel_tutorial/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 TORTOISE_INIT = {
