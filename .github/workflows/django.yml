@@ -12,14 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:latest
+        image: postgres
         ports:
           - 5432:5432
         env:
           POSTGRES_PASS: 12345
           POSTGRES_USER: postgres
           POSTGRES_DB: chatdb
-        options: --health-cmd=pg_isready --health-interval 15s --health-timeout 10s --health-retries 5
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 15s
+          --health-timeout 10s
+          --health-retries 5       
     strategy:
       max-parallel: 4
       matrix:
