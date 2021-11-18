@@ -17,7 +17,7 @@ jobs:
           - 5432:5432
         env:
           POSTGRES_PASS: 12345
-          POSTGRES_USER: user
+          POSTGRES_USER: postgres
           POSTGRES_DB: chatdb
         options: --health-cmd=pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     strategy:
@@ -46,7 +46,7 @@ jobs:
         PSQL_NAME: chatdb       
         PSQL_HOST: 127.0.0.1
         PSQL_PORT: 5432
-        PSQL_USER: user        
+        PSQL_USER: postgres        
         PSQL_PASS: 12345
       run: |
         python manage.py migrate
