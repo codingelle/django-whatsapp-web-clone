@@ -17,7 +17,9 @@ jobs:
           - 5432:5432
         env:
           POSTGRES_PASS: 12345
-          POSTGRES_USER: user       
+          POSTGRES_USER: user
+          POSTGRES_DB: chatdb
+        options: --health-cmd=pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     strategy:
       max-parallel: 4
       matrix:
