@@ -40,6 +40,7 @@ jobs:
         DJANGO_SUPERUSER_PASSWORD: admin
         DJANGO_SUPERUSER_USERNAME: admin
         DJANGO_SUPERUSER_EMAIL: admin@gmail.com
+        DJANGO_SETTINGS_MODULE: django_channel_tutorial.production
       run: |
         python manage.py migrate
         python manage.py createsuperuser --no-input        
