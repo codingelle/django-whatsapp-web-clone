@@ -16,8 +16,8 @@ jobs:
         ports:
           - 5432:5432
         env:
-          PSQL_PASS: 12345
-          PSQL_USER: user       
+          POSTGRES_PASS: 12345
+          POSTGRES_USER: user       
     strategy:
       max-parallel: 4
       matrix:
