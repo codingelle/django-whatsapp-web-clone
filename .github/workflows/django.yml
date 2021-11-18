@@ -12,12 +12,21 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:latest
-        ports:
-          - 5432:5432
+        image: postgres   
+        # Provide the password for postgres
         env:
-          PSQL_PASS: 12345
-          PSQL_USER: user       
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: chatdb
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
     strategy:
       max-parallel: 4
       matrix:
@@ -40,6 +49,12 @@ jobs:
         DJANGO_SUPERUSER_PASSWORD: admin
         DJANGO_SUPERUSER_USERNAME: admin
         DJANGO_SUPERUSER_EMAIL: admin@gmail.com
+        DJANGO_SETTINGS_MODULE: django_channel_tutorial.production
+        PSQL_NAME: chatdb       
+        PSQL_HOST: 127.0.0.1
+        PSQL_PORT: 5432
+        PSQL_USER: postgres        
+        PSQL_PASS: postgres
       run: |
         python manage.py migrate
         python manage.py createsuperuser --no-input        
