@@ -302,17 +302,14 @@
                     scrollBottom()
                 })
         }
-        loadMessage()
 
         document.getElementById('btnGif').addEventListener('click', e => {
             loadGif();
-            document.querySelector('.giphy-search').style.display = 'grid';
-            document.getElementById('btnClose').style.display = 'grid';
+            document.querySelector('.room-container__msg').classList.add('giphy-search-show')
         })
 
         document.getElementById('btnClose').addEventListener('click', e => {
-            //document.querySelector('.close').style.display = 'none';
-            document.querySelector('.giphy-search').style.display = 'none';
+            document.querySelector('.room-container__msg').classList.remove('giphy-search-show')
         })
 
         document.getElementById('searchGifs').addEventListener('input', e => {
@@ -358,6 +355,8 @@
             document.querySelector('#room-message').style.display = 'none';
             document.querySelector('#add-caption-input').focus();
         }
+
+        loadMessage()
 
     </script>
 {% endblock content %}
