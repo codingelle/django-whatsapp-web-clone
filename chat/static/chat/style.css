@@ -192,11 +192,12 @@
     min-height: 99vh;
     height:99vh;
     grid-template-columns: 1fr;
-    grid-template-rows: 59px auto auto 62px;
+    grid-template-rows: 59px auto 0px 62px; /* dynamically change to toggle giphy search */
     grid-template-areas: "msg-header"
                          "msg-box"
                          "giphy-search"
                          "msg-input";
+    overflow: hidden; /* hide unnecessary scroll */
 }
 
 .room-container__preview-img {
@@ -280,17 +281,18 @@ svg {
     padding-right:4rem;
 }
 
+.giphy-search-show {
+    grid-template-rows: 59px auto 300px 62px;
+}
+
 .giphy-search {
     grid-area: giphy-search;
-    height: 350px;
     display: grid;
     grid-template-rows: 62px auto;
     grid-template-columns: 1fr;
     grid-template-areas: "ginput"
                          "gresults";
     padding: 1rem;
-
-
 }
 
 .giphy-search__input input[type=text] {
