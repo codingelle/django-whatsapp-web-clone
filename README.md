@@ -2,7 +2,7 @@
 
 [![Django CI](https://github.com/codingelle/django-whatsapp-web-clone/actions/workflows/django.yml/badge.svg)](https://github.com/codingelle/django-whatsapp-web-clone/actions/workflows/django.yml)
 
-## Search GIFs by GIPHY
+## Send GIFs by GIPHY
 
 ![ezgif-7-8f0423e40e28](https://user-images.githubusercontent.com/3206118/141478058-df2f4ebb-f7f1-4666-b084-a14bcb98634e.gif)
 
