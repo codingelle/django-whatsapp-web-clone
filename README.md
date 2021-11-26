@@ -2,6 +2,23 @@
 
 [![Django CI](https://github.com/codingelle/django-whatsapp-web-clone/actions/workflows/django.yml/badge.svg)](https://github.com/codingelle/django-whatsapp-web-clone/actions/workflows/django.yml)
 
+## Demo
+
+#### Login User1 
+* Url: http://167.172.69.15:8088/admin/login/ (Use Chrome Browser)
+* Login: johnny2020
+* Pass: johnny2020
+
+#### Login User2 
+* Url: http://167.172.69.15:8088/admin/login/ (Use Non Chrome browser)
+* User2: jay1234
+* Pass: jay1234
+
+#### Start Chat
+http://167.172.69.15:8088/chat/1/
+
+
+
 ## Send GIFs by GIPHY
 
 ![ezgif-7-8f0423e40e28](https://user-images.githubusercontent.com/3206118/141478058-df2f4ebb-f7f1-4666-b084-a14bcb98634e.gif)
