@@ -5,17 +5,17 @@
 ## Demo
 
 #### Login User1 
-* Url: http://167.172.69.15:8088/admin/login/ (Use Chrome Browser)
+* Url: https://django-whatsapp-demo.ml/admin/login/ (Use Chrome Browser)
 * Login: johnny2020
 * Pass: johnny2020
 
 #### Login User2 
-* Url: http://167.172.69.15:8088/admin/login/ (Use Non Chrome browser)
+* Url: https://django-whatsapp-demo.ml/admin/login/ (Use Non Chrome browser)
 * User2: jay1234
 * Pass: jay1234
 
 #### Start Chat
-http://167.172.69.15:8088/chat/1/
+https://django-whatsapp-demo.ml/chat/1/
 
 
 
