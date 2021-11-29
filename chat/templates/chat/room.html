@@ -90,8 +90,12 @@
         const roomId = '{{chatgroup.id}}'
         var tempDaysWeekdays = [];
 
+        console.log(location.protocol)
+
+        let webSocketProtocol = location.protocol == 'https:' ? 'wss' : 'ws';
+
         const chatSocket = new WebSocket(
-            `ws://${window.location.host}/ws/chat/${roomId}/`
+            `${webSocketProtocol}://${window.location.host}/ws/chat/${roomId}/`
         );
 
         chatSocket.onmessage = function(e) {
