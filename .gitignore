@@ -1,6 +1,7 @@
 *.py[cod]
 __pycache__/
 db.sqlite3
+db.sqlite3.tortoise
 env
 media
 .vscode
