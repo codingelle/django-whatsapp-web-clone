@@ -10,8 +10,8 @@
 * Pass: johnny2020
 
 #### Login User2 
-* Url: https://django-whatsapp-demo.ml/admin/login/ (Use Non Chrome browser)
-* User2: jay1234
+* Url: https://django-whatsapp-demo.ml/admin/login/ (Use Microsoft Edge or any browser except Chrome)
+* User: jay1234
 * Pass: jay1234
 
 #### Start Chat
