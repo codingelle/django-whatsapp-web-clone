@@ -15,6 +15,7 @@
 * Pass: jay1234
 
 #### Start Chat
+##### Make sure to login using User1 or User2
 https://django-whatsapp-demo.ml/chat/1/
 
 
