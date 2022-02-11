@@ -34,7 +34,7 @@ service-identity==18.1.0
 six==1.15.0
 sqlparse==0.3.1
 tortoise-orm==0.16.16
-Twisted==20.3.0
+Twisted==22.1.0
 txaio==21.2.1
 typing-extensions==3.7.4.3
 zope.interface==5.1.0
