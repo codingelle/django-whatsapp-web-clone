@@ -16,7 +16,7 @@
 
 #### Start Chat
 ##### Make sure to login using User1 or User2
-https://dj-whatsapp-demo.ml/chat/1/
+https://dj-whatsapp-demo.ml/chat/2/
 
 
 
