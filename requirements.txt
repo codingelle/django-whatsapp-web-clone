@@ -16,10 +16,10 @@ Django==3.2.12
 hiredis==1.1.0
 hyperlink==21.0.0
 idna==2.10
-incremental==17.5.0
+incremental==21.3.0
 iso8601==0.1.13
 msgpack==1.0.0
-Pillow==9.0.0
+Pillow==9.0.1
 psycopg2==2.7.7
 psycopg2-binary==2.9.2
 pyasn1==0.4.8
@@ -34,7 +34,7 @@ service-identity==18.1.0
 six==1.15.0
 sqlparse==0.3.1
 tortoise-orm==0.16.16
-Twisted==20.3.0
+Twisted==22.1.0
 txaio==21.2.1
 typing-extensions==3.7.4.3
 zope.interface==5.1.0
