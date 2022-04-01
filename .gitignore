@@ -3,6 +3,7 @@ __pycache__/
 db.sqlite3
 db.sqlite3.tortoise
 env
+env2
 media
 .vscode
 .env

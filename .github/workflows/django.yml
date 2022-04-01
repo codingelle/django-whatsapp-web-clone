@@ -50,11 +50,11 @@ jobs:
         DJANGO_SUPERUSER_USERNAME: admin
         DJANGO_SUPERUSER_EMAIL: admin@gmail.com
         DJANGO_SETTINGS_MODULE: django_channel_tutorial.production
-        PSQL_NAME: chatdb       
-        PSQL_HOST: 127.0.0.1
-        PSQL_PORT: 5432
-        PSQL_USER: postgres        
-        PSQL_PASS: postgres
+        POSTGRESQL_USER: postgres
+        POSTGRESQL_PASSWORD: postgres
+        POSTGRESQL_DATABASE: chatdb
+        POSTGRESQL_HOST: 127.0.0.1
+        POSTGRESQL_PORT: 5432
       run: |
         python manage.py migrate
         python manage.py createsuperuser --no-input        

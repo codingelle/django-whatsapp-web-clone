@@ -8,16 +8,16 @@ DEBUG = False
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('PSQL_NAME'),
-        'USER': os.getenv('PSQL_USER'),
-        'PASSWORD': os.getenv('PSQL_PASS'),
-        'HOST': os.getenv('PSQL_HOST'),
-        'PORT': os.getenv('PSQL_PORT'),
+        'NAME': os.getenv('POSTGRESQL_DATABASE'),
+        'USER': os.getenv('POSTGRESQL_USER'),
+        'PASSWORD': os.getenv('POSTGRESQL_PASSWORD'),
+        'HOST': os.getenv('POSTGRESQL_HOST'),
+        'PORT': os.getenv('POSTGRESQL_PORT'),
     }
 }
 
 TORTOISE_INIT = {
-    "db_url": f"postgres://{os.getenv('PSQL_USER')}:{os.getenv('PSQL_PASS')}@{os.getenv('PSQL_HOST')}:{os.getenv('PSQL_PORT')}/{os.getenv('PSQL_NAME')}",
+    "db_url": f"postgres://{os.getenv('POSTGRESQL_USER')}:{os.getenv('POSTGRESQL_PASSWORD')}@{os.getenv('POSTGRESQL_HOST')}:{os.getenv('POSTGRESQL_PORT')}/{os.getenv('POSTGRESQL_DATABASE')}",
     "modules" : {
         "models": ["chat.tortoise_models"]
      }
