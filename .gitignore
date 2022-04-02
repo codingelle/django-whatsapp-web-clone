@@ -7,4 +7,6 @@ env2
 media
 .vscode
 .env
+.env.production
+.env.staging
 *.swp

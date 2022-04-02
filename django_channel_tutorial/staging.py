@@ -1,7 +1,7 @@
 from .settings import *
 from dotenv import load_dotenv
 
-load_dotenv('.env.production')
+load_dotenv('.env.staging')
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
