@@ -24,11 +24,16 @@ pipeline {
       }
     }
 
-    //stage("Deploy") {
-    //  steps {
-    //    echo "Deploy here"
-    //  }
-    //}
+    stage("Deploy") {
+      steps {
+        echo "Deploy here"
+        dir("$MYHOME") {
+            //sh "git pull origin master"
+            git credentialsId: 'GithubPassphrase', url: 'https://github.com/codingelle/django-whatsapp-web-clone'
+            // restart all services?
+        }
+      }
+    }
   }
   post {
     // Clean after build
@@ -36,11 +41,8 @@ pipeline {
         cleanWs()
         sh "podman pod rm staging-pod -f"
     }
-    success("Deploy") {
+    success {
         echo "Build success"
-        //dir("$HOME/Documents") {
-        //    sh "git pull origin master"
-        //}
     }
     failure {
         echo "Build failed"
