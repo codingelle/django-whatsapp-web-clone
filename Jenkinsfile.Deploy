@@ -4,17 +4,54 @@ pipeline {
     MYHOME = "$HOME/Documents/django-whatsapp-web-clone"
   }
   stages {
-    stage("Deploy") {
+    stage("Pod Svc") {
       steps {
-        sh """
-            podman pod create -n prod-pod -p 8083:8083 -p 6379:6379 -p 5432:5432 -p 8085:8080
-            podman run --pod=prod-pod -d --name redis-prod-svc registry.redhat.io/rhel8/redis-5:1-160.1647451816
-            podman run --pod=prod-pod -d --name psql-prod-svc --env-file=$MYHOME/.env.production registry.redhat.io/rhel8/postgresql-12:1-99.1647451835
-            podman run -u root -d --pod=prod-pod --name app-prod-svc --env-file=$MYHOME/.env.production -v $MYHOME/:/opt/app-root/src/ registry.access.redhat.com/ubi8/python-38 bash -c "pip install -U pip && pip install -r requirements.txt && python manage.py migrate && python manage.py createsuperuser --no-input && daphne -b 0.0.0.0 -p 8083 django_channel_tutorial.asgi:application"
-            podman run -u root -d --pod=prod-pod --name nginx-prod-svc -v $MYHOME/nginx-cfg:/opt/app-root/etc/nginx.d/:Z -v $MYHOME:/opt/app-root/src/:Z registry.access.redhat.com/ubi8/nginx-118 nginx -g "daemon off;"
-
+        sh "podman pod create -n prod-pod -p 8083:8083 -p 6379:6379 -p 5432:5432 -p 8085:8080"
+      }
+    }
+    stage("Redis Svc") {
+      steps {
+        sh "podman run --pod=prod-pod -d --name redis-prod-svc --healthcheck-command 'CMD-SHELL redis-cli || exit 1' --healthcheck-interval=0 registry.redhat.io/rhel8/redis-5:1-160.1647451816"
+         sh """
+            #!/bin/bash
+            while [ "`podman healthcheck run redis-prod-svc`" = "unhealthy" ]; do
+                sleep 3
+            done
         """
-        //podman run --pod=staging-pod -d --name app-svc --env-file=$MYHOME/.env.staging localhost/django-app:latest
+      }
+    }
+    stage("PSQL Svc") {
+      steps {
+        sh "podman run --pod=prod-pod -d --name psql-prod-svc --healthcheck-command 'CMD-SHELL pg_isready || exit 1' --healthcheck-interval=0 --env-file=$MYHOME/.env.production registry.redhat.io/rhel8/postgresql-12:1-99.1647451835"
+        sh """
+            #!/bin/bash
+            while [ "`podman healthcheck run psql-prod-svc`" = "unhealthy" ]; do
+                sleep 10
+            done
+        """
+      }
+    }
+    stage("App Svc") {
+      steps {
+        sh 'podman run -u root -d --pod=prod-pod --name app-prod-svc --healthcheck-command "CMD-SHELL python manage.py test || exit 1" --healthcheck-interval=0 --env-file=$MYHOME/.env.production -v $MYHOME:/opt/app-root/src/ registry.access.redhat.com/ubi8/python-38 bash -c "pip install -U pip && pip install -r requirements.txt && python manage.py migrate && python manage.py createsuperuser --no-input && python manage.py runserver 0.0.0.0:8083"'
+        sh """
+            #!/bin/bash
+            while [ "`podman healthcheck run app-prod-svc`" = "unhealthy" ]; do
+                sleep 15
+            done
+        """
+      }
+    }
+     stage("Nginx Svc") {
+      steps {
+        sh 'podman run -u root -d --pod=prod-pod --name nginx-prod-svc --healthcheck-command "CMD-SHELL nginx -T || exit 1" -v $MYHOME/nginx-cfg:/opt/app-root/etc/nginx.d/:Z -v $MYHOME:/opt/app-root/src/:Z registry.access.redhat.com/ubi8/nginx-118 nginx -g "daemon off;"'
+        sh """
+            #!/bin/bash
+            while [ "`podman healthcheck run nginx-prod-svc`" = "unhealthy" ]; do
+                sleep 3
+            done
+        """
+          
       }
     }
    
