@@ -5,18 +5,18 @@
 ## Demo
 
 #### Login User1 
-* Url: https://dj-whatsapp-demo.ml/admin/login/ (Use Chrome Browser)
+* Url: https://demo.josnin.dev/django-whatsapp-clone/admin/login/ (Use Chrome Browser)
 * Login: johnny2020
 * Pass: johnny2020
 
 #### Login User2 
-* Url: https://dj-whatsapp-demo.ml/admin/login/ (Use Microsoft Edge or any browser except Chrome)
+* Url: https://demo.josnin.dev/django-whatsapp-clone/admin/login/ (Use Microsoft Edge or any browser except Chrome)
 * User: jay1234
 * Pass: jay1234
 
 #### Start Chat
 ##### Make sure to login using User1 or User2
-https://dj-whatsapp-demo.ml/chat/2/
+https://demo.josnin.dev/django-whatsapp-clone/chat/2/
 
 
 
