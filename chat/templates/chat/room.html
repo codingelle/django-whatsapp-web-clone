@@ -91,11 +91,8 @@
         var tempDaysWeekdays = [];
 
 
-        let webSocketProtocol = location.protocol == 'https:' ? 'wss' : 'ws';
 
-        const chatSocket = new WebSocket(
-            `${webSocketProtocol}://${window.location.host}/ws/chat/${roomId}/`
-        );
+        const chatSocket = new WebSocket('{{WS_URL}}');
 
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);

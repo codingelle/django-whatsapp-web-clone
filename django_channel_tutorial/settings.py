@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sslserver',
     'channels',
     'chat'
 ]
@@ -125,6 +126,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'django_channel_tutorial/static')]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 ASGI_APPLICATION = "django_channel_tutorial.routing.application"
 CHANNEL_LAYERS = {
     'default': {
@@ -148,3 +151,5 @@ TORTOISE_INIT = {
 
 GIPHY_URL = 'https://api.giphy.com/v1/gifs'
 API_KEY = os.getenv('API_KEY')
+
+WS_URL = "ws://127.0.0.1:8088/ws/chat"

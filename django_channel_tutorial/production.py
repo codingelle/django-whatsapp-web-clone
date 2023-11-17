@@ -8,6 +8,9 @@ load_dotenv('.env.production')
 
 DEBUG = False
 
+STATIC_URL = "/django-whatsapp-clone/static/"
+MEDIA_URL = "/django-whatsapp-clone/media/"
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -34,3 +37,5 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+WS_URL = "wss://demo.josnin.dev/django-whatsapp-clone/ws/chat"

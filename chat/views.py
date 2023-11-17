@@ -45,7 +45,8 @@ def room(request, group_id):
             'participants': get_participants(group_obj=chatgroup, user=request.user.username),
             'groups_participated': groups_participated,
             'GIPHY_URL': settings.GIPHY_URL,
-            'API_KEY': settings.API_KEY
+            'API_KEY': settings.API_KEY,
+            'WS_URL': settings.WS_URL
         })
     else:
         return HttpResponseRedirect(reverse("chat:unauthorized"))
